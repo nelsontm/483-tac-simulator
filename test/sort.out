@@ -1,6 +1,5 @@
-Error: variable _tmp1 undefined
 
 This program will read in a bunch of numbers and print them
 back out in sorted order.
 
-How many scores? 
+How many scores? Enter next number: Enter next number: Enter next number: Enter next number: Enter next number: Sorted results: 59 60 80 90 100 

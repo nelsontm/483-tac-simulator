@@ -255,6 +255,28 @@ while PC < len(tac):
                         print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
                         exit(1)
                     print(stack[-1], end="")
+                elif field[1] == "_PrintBool":
+                    if(len(stack)) == 0:
+                        print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
+                        exit(1)
+                    if stack[-1] == 0:
+                        print("False", end="")
+                    else:
+                        print("True", end="")
+                elif field[1] == "_ReadLine":
+                    returnregister = input()
+                elif field[1] == "_ReadInteger":
+                    returnregister = int(input())
+                elif field[1] == "_StringEqual":
+                    if(len(stack)) <= 1:
+                        print("Error: stack empty, trying to fill strcmp argument", file=sys.stderr)
+                        exit(1)
+                    returnregister = int(stack[-1] == stack[-2])
+                elif field[1] == "_Alloc":
+                    if(len(stack)) == 0:
+                        print("Error: stack empty, trying to fill Alloc argument", file=sys.stderr)
+                        exit(1)
+                    returnregister = [None] * (stack[-1]//4 - 1) + [stack[-1]//4 - 1]
         elif PC in stringconstants:
             variables[field[0]] = stringconstants[PC]
         elif field[0][0:2] == '*(':
@@ -307,11 +329,30 @@ while PC < len(tac):
                         print(stack[-1], end="")
                         print("Error:", field[3], "does not return a value", file=sys.stderr)
                         exit(1)
-                    elif field[3] == "_Alloc":
+                    elif field[3] == "_PrintBool":
                         if(len(stack)) == 0:
                             print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
                             exit(1)
+                        if stack[-1] == 0:
+                            print("False", end="")
+                        else:
+                            print("True", end="")
+                    elif field[3] == "_ReadLine":
+                        variables[field[0]] = input()
+                    elif field[3] == "_ReadInteger":
+                        variables[field[0]] = int(input())
+                    elif field[3] == "_StringEqual":
+                        if(len(stack)) <= 1:
+                            print("Error: stack empty, trying to fill strcmp argument", file=sys.stderr)
+                            exit(1)
+                        variables[field[0]] = int(stack[-1] == stack[-2])
+                    elif field[3] == "_Alloc":
+                        if(len(stack)) == 0:
+                            print("Error: stack empty, trying to fill Alloc argument", file=sys.stderr)
+                            exit(1)
                         variables[field[0]] = [None] * (stack[-1]//4 - 1) + [stack[-1]//4 - 1]
+                    else:
+                        print("Error: missing builtin", field[3], file=sys.stderr)
             if len(field) == 3 and field[2][:2] != "*(":
                 # Simple assign
                 if field[2][0] >= '0' and field[2][0] <= '9':
@@ -345,7 +386,6 @@ while PC < len(tac):
                 field[4] = field[4][:-1]
                 if field[2] not in variables:
                     print("Error: variable", field[2], "undefined", file=sys.stderr)
-                    print(PC)
                     exit(1)
                 if type(variables[field[2]]) == list:
                     variables[field[0]] = variables[field[2]][int(field[4])//4]
