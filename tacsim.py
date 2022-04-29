@@ -43,17 +43,19 @@ if not os.path.isfile(args.file):
     exit(1)
 
 # Simulation data structures
+builtins = ["_Alloc", "_ReadLine", "_ReadInteger", "_StringEqual", "_PrintInt", "_PrintString", "_PrintBool", "_Halt"]
 tac = read_lines(args.file)
 variables = {}
 labels = {}
 vtables = {}
 stack = []
 returnstack = []
+# Each element of return stack is a tuple of (Return PC, Return Current Args, Return Variables)
 returnregister = 0
+current_args = []
 
 # Initial pass to map labels, vtables, remove comments and whitespace
 PC = 0
-def_VTable = False
 while PC<len(tac):
     line = tac[PC]
     line = line.replace("\n", "")
@@ -97,7 +99,7 @@ while PC<len(tac):
             print("Error: Label not terminated:", line, file=sys.stderr)
             exit(1)
         index += 1
-        if label in labels:
+        if label in labels or label in builtins:
             print("Error: label double defined:", label, file=sys.stderr)
             exit(1)
         labels[label] = PC
@@ -117,5 +119,136 @@ while PC<len(tac):
         exit(1)
     tac[PC] = line.strip()
     PC += 1
-for line in tac:
-    print(line)
+
+# Now run the program
+if not "main" in labels:
+    print("Error: No label main defined.", file=sys.stderr)
+    exit(1)
+
+PC = labels["main"]
+while PC < len(tac):
+    if tac[PC] != "":
+        index = 0
+        field0 = ""
+        while index<len(tac[PC]) and not tac[PC][index].isspace():
+            field0 += tac[PC][index]
+            index += 1
+        if field0 == "BeginFunc":
+            current_args = []
+            while index<len(tac[PC]) and not tac[PC][index] == '(':
+                index += 1
+            index += 1
+            arg = ""
+            while index<len(tac[PC]) and not tac[PC][index] == ')':
+                if tac[PC][index] == ',':
+                    current_args.append(arg)
+                    arg = ""
+                elif not tac[PC][index].isspace():
+                    arg += tac[PC][index]
+                index += 1
+            if index == len(tac[PC]):
+                print("Error: argslist not terminated:", tac[PC], file=sys.stderr)
+                exit(1)
+            if arg != "":
+                current_args.append(arg)
+            idx = 0
+            while idx<len(current_args):
+                variables[current_args[idx]] = stack[-idx -1]
+                idx += 1
+        elif field0 == "EndFunc":
+            if len(returnstack) == 0:
+                exit(0)
+            frame = returnstack[-1]
+            PC = frame[0]
+            current_args = frame[1]
+            variables = frame[2]
+            returnstack.pop()
+            if "=" in tac[PC]:
+                print("Error: control reaches end of non-void function", file=sys.stderr)
+                exit(1)
+        elif field0 == "Return":
+            non_void = (tac[PC] != field0)
+            if tac[PC] != field0:
+                # There is a value to return
+                index += 1
+                field1 = ""
+                while index<len(tac[PC]) and not tac[PC][index].isspace():
+                    field1 += tac[PC][index]
+                    index += 1
+                if not field1 in variables and field1 != "":
+                    print("Error: variable", field1, "undefined", file=sys.stderr)
+                    exit(1)
+                if field1 != "":
+                    returnregister = variables[field1]
+            if len(returnstack) == 0:
+                exit(0)
+            frame = returnstack[-1]
+            PC = frame[0]
+            current_args = frame[1]
+            variables = frame[2]
+            returnstack.pop()
+            if "=" in tac[PC]:
+                if non_void:
+                    print("Error: control reaches end of non-void function", file=sys.stderr)
+                    exit(1)
+                index = 0
+                field0 = ""
+                while index<len(tac[PC]) and not tac[PC][index].isspace():
+                    field0 += tac[PC][index]
+                    index += 1
+                variables[field0] = returnregister
+        elif field0 == "Goto":
+            index += 1
+            if not tac[PC][index:] in labels:
+                print("Error: No label", tag[PC][index:], "defined.", file=sys.stderr)
+                exit(1)
+            field1 = tac[PC][index:]
+            if field1 not in labels:
+                print("Error: No label", field3, "defined.", file=sys.stderr)
+                exit(1)
+            PC = labels[field1] - 1 # To offset += 1 at the end
+        elif field0 == "IfZ":
+            index += 1
+            field1 = ""
+            while index<len(tac[PC]) and not tac[PC][index].isspace():
+                field1 += tac[PC][index]
+                index += 1
+            if index == len(tac[PC]):
+                print("Error: no goto after IfZ:", tac[PC], file=sys.stderr)
+                exit(1)
+            if not field1 in variables:
+                print("Error: variable", field1, "undefined", file=sys.stderr)
+                exit(1)
+            if variables[field1] == 0:
+                field2 = ""
+                while index<len(tac[PC]) and not tac[PC][index].isspace():
+                    field2 += tac[PC][index]
+                    index += 1
+                if index == len(tac[PC]):
+                    print("Error: no goto after IfZ:", tac[PC], file=sys.stderr)
+                    exit(1)
+                index += 1
+                field3 = tac[PC][index:]
+                if field3 not in labels:
+                    print("Error: No label", field3, "defined.", file=sys.stderr)
+                    exit(1)
+                PC = labels[field3] - 1 # To offset += 1 at the end
+        elif field0 == "PushParam":
+            index += 1
+            field1 = tac[PC][index:]
+            if field1 == "":
+                print("Error: no param specified to push", file=sys.stderr)
+                exit(1)
+            if not field1 in variables:
+                print("Error: variable", field1, "undefined", file=sys.stderr)
+                exit(1)
+            stack.append(variables[field1])
+        elif field0 == "PopParams":
+            index += 1
+            field1 = tac[PC][index:]
+            field1 = int(field1) / 4
+            for i in range(field1):
+                stack.pop()
+    PC += 1
+print("Error: End of TAC file reached without halt", file=sys.stderr)
+exit(1)
