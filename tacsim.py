@@ -235,7 +235,7 @@ while PC < len(tac):
                 print("Error: No label", field[1], "defined.", file=sys.stderr)
                 exit(1)
             if field[1] in labels:
-                frame = (PC, current_args, variables)
+                frame = (PC, current_args, variables.copy())
                 returnstack.append(frame)
                 PC = labels[field[1]] - 1 # To offset += 1 at the end
             else:
@@ -282,7 +282,7 @@ while PC < len(tac):
                     print("Error: No label", field[3], "defined.", file=sys.stderr)
                     exit(1)
                 if field[3] in labels:
-                    frame = (PC, current_args, variables)
+                    frame = (PC, current_args, variables.copy())
                     returnstack.append(frame)
                     PC = labels[field[3]] - 1 # To offset += 1 at the end
                 else:
@@ -319,6 +319,23 @@ while PC < len(tac):
                     exit(1)
                 if field[3] == "+":
                     variables[field[0]] = variables[field[2]] + variables[field[4]]
+                if field[3] == "-":
+                    variables[field[0]] = variables[field[2]] - variables[field[4]]
+                if field[3] == "*":
+                    variables[field[0]] = variables[field[2]] * variables[field[4]]
+                if field[3] == "/":
+                    variables[field[0]] = variables[field[2]] // variables[field[4]]
+                if field[3] == "%":
+                    variables[field[0]] = variables[field[2]] % variables[field[4]]
+                if field[3] == "==":
+                    variables[field[0]] = int(variables[field[2]] == variables[field[4]])
+                if field[3] == "<":
+                    variables[field[0]] = int(variables[field[2]] < variables[field[4]])
+                if field[3] == "&&":
+                    variables[field[0]] = int(variables[field[2]] and variables[field[4]])
+                if field[3] == "||":
+                    variables[field[0]] = int(variables[field[2]] or variables[field[4]])
+                
 
                 
     PC += 1
