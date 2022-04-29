@@ -169,6 +169,7 @@ while PC < len(tac):
             returnstack.pop()
             if "=" in tac[PC]:
                 print("Error: control reaches end of non-void function", file=sys.stderr)
+                print(tac[PC])
                 exit(1)
         elif field[0] == "Return":
             non_void = (len(field)>0)
@@ -188,8 +189,9 @@ while PC < len(tac):
             returnstack.pop()
             if "=" in tac[PC]:
                 field = tac[PC].split()
-                if non_void:
-                    print("Error: control reaches end of non-void function", file=sys.stderr)
+                if not non_void:
+                    print("Error:", field[3], "does not return a value", file=sys.stderr)
+                    print(tac[PC])
                     exit(1)
                 variables[field[0]] = returnregister
         elif field[0] == "Goto":
@@ -272,6 +274,28 @@ while PC < len(tac):
             exit(1)
         else:
             # At least 3 fields and field 1 is =
+            if field[2] == "LCall":
+                if len(field) != 4:
+                    print("Error: No label listed after LCall", file=sys.stderr)
+                    exit(1)
+                if not field[3] in labels and field[3] not in builtins:
+                    print("Error: No label", field[3], "defined.", file=sys.stderr)
+                    exit(1)
+                if field[3] in labels:
+                    frame = (PC, current_args, variables)
+                    returnstack.append(frame)
+                    PC = labels[field[3]] - 1 # To offset += 1 at the end
+                else:
+                    #builtins
+                    if field[3] == "_Halt":
+                        exit(0)
+                    elif field[3] == "_PrintString" or field[3] == "_PrintInt":
+                        if(len(stack)) == 0:
+                            print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
+                            exit(1)
+                        print(stack[-1], end="")
+                        print("Error:", field[3], "does not return a value", file=sys.stderr)
+                        exit(1)
             if len(field) == 3 and field[2][:2] != "*(":
                 # Simple assign
                 if field[2][0] >= '0' and field[2][0] <= '9':
@@ -281,6 +305,21 @@ while PC < len(tac):
                         print("Error: variable", field[2], "undefined", file=sys.stderr)
                         exit(1)
                     variables[field[0]] = variables[field[2]]
+            if len(field) > 5:
+                print("Error: bad syntax", tac[PC], file=sys.stderr)
+                exit(1)
+            if len(field) == 5:
+                if field[3] not in ["+", "-", "*", "/", "%", "==", "<", "&&", "||"]:
+                    print("Error: invalid binary operation", tac[PC], file=sys.stderr)
+                if field[2] not in variables:
+                    print("Error: variable", field[2], "undefined", file=sys.stderr)
+                    exit(1)
+                if field[4] not in variables:
+                    print("Error: variable", field[4], "undefined", file=sys.stderr)
+                    exit(1)
+                if field[3] == "+":
+                    variables[field[0]] = variables[field[2]] + variables[field[4]]
+
                 
     PC += 1
 print("Error: End of TAC file reached without halt", file=sys.stderr)
