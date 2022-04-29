@@ -357,6 +357,8 @@ while PC < len(tac):
                 # Simple assign
                 if field[2][0] >= '0' and field[2][0] <= '9':
                     variables[field[0]] = int(field[2])
+                elif field[2] in vtables:
+                    variables[field[0]] = vtables[field[2]]
                 else:
                     if field[2] not in variables:
                         print("Error: variable", field[2], "undefined", file=sys.stderr)
