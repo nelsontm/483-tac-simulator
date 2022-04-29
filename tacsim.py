@@ -165,6 +165,10 @@ while PC < len(tac):
             frame = returnstack[-1]
             PC = frame[0]
             current_args = frame[1]
+            # Copy modified globals
+            for key in variables:
+                if key not in frame[2]:
+                    frame[2][key] = variables[key]
             variables = frame[2]
             returnstack.pop()
             if "=" in tac[PC]:
@@ -185,6 +189,10 @@ while PC < len(tac):
             frame = returnstack[-1]
             PC = frame[0]
             current_args = frame[1]
+            # Copy modified globals
+            for key in variables:
+                if key not in frame[2]:
+                    frame[2][key] = variables[key]
             variables = frame[2]
             returnstack.pop()
             if "=" in tac[PC]:
@@ -268,7 +276,10 @@ while PC < len(tac):
             if field[2] not in variables:
                 print("Error: variable", field[2], "undefined", file=sys.stderr)
                 exit(1)
-            variables[field[0][offset]] = variables[field[2]]
+            if type(variables[field[0]]) == list:
+                variables[field[0]][offset] = variables[field[2]]
+            elif type(variables[field[0]]) == tuple:
+                variables[field[0]][0][offset + variables[field[0]][1]//4] = variables[field[2]]
         elif len(field) < 3 or field[1] != "=":
             print("Error: unrecognized instruction:", tac[PC], file=sys.stderr)
             exit(1)
@@ -296,6 +307,11 @@ while PC < len(tac):
                         print(stack[-1], end="")
                         print("Error:", field[3], "does not return a value", file=sys.stderr)
                         exit(1)
+                    elif field[3] == "_Alloc":
+                        if(len(stack)) == 0:
+                            print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
+                            exit(1)
+                        variables[field[0]] = [None] * (stack[-1]//4 - 1) + [stack[-1]//4 - 1]
             if len(field) == 3 and field[2][:2] != "*(":
                 # Simple assign
                 if field[2][0] >= '0' and field[2][0] <= '9':
@@ -305,10 +321,37 @@ while PC < len(tac):
                         print("Error: variable", field[2], "undefined", file=sys.stderr)
                         exit(1)
                     variables[field[0]] = variables[field[2]]
+            elif len(field) == 3:
+                if field[2][-1] != ")":
+                    print("Error: bad syntax for load", tac[PC], file=sys.stderr)
+                    exit(1)
+                field[2] = field[2][2:-1]
+                if field[2] not in variables:
+                    print("Error: variable", field[2], "undefined", file=sys.stderr)
+                    print(PC)
+                    exit(1)
+                if type(variables[field[2]]) == list:
+                    variables[field[0]] = variables[field[2]][0]
+                elif type(variables[field[2]]) == tuple:
+                    variables[field[0]] = variables[field[2]][0][variables[field[2]][1]//4]
             if len(field) > 5:
                 print("Error: bad syntax", tac[PC], file=sys.stderr)
                 exit(1)
-            if len(field) == 5:
+            if len(field) == 5 and field[2][0:2] == "*(":
+                if field[4][-1] != ")" or field[3] != "+":
+                    print("Error: bad syntax for load", tac[PC], file=sys.stderr)
+                    exit(1)
+                field[2] = field[2][2:]
+                field[4] = field[4][:-1]
+                if field[2] not in variables:
+                    print("Error: variable", field[2], "undefined", file=sys.stderr)
+                    print(PC)
+                    exit(1)
+                if type(variables[field[2]]) == list:
+                    variables[field[0]] = variables[field[2]][int(field[4])//4]
+                elif type(variables[field[2]]) == tuple:
+                    variables[field[0]] = variables[field[2]][0][variables[field[2]][1]//4 + int(field[4])//4]
+            elif len(field) == 5:
                 if field[3] not in ["+", "-", "*", "/", "%", "==", "<", "&&", "||"]:
                     print("Error: invalid binary operation", tac[PC], file=sys.stderr)
                 if field[2] not in variables:
@@ -318,7 +361,16 @@ while PC < len(tac):
                     print("Error: variable", field[4], "undefined", file=sys.stderr)
                     exit(1)
                 if field[3] == "+":
-                    variables[field[0]] = variables[field[2]] + variables[field[4]]
+                    if(type(variables[field[2]]) == int and type(variables[field[4]]) == int):
+                        variables[field[0]] = variables[field[2]] + variables[field[4]]
+                    if(type(variables[field[2]]) == list and type(variables[field[4]]) ==  int):
+                        variables[field[0]] = (variables[field[2]], variables[field[4]])
+                    if(type(variables[field[2]]) == int and type(variables[field[4]]) ==  list):
+                        variables[field[0]] = (variables[field[4]], variables[field[2]])
+                    if(type(variables[field[2]]) == tuple and type(variables[field[4]]) ==  int):
+                        variables[field[0]] = (variables[field[2]][0], variables[field[2]][1] + variables[field[4]])
+                    if(type(variables[field[2]]) == int and type(variables[field[4]]) ==  tuple):
+                        variables[field[0]] = (variables[field[4]][0], variables[field[4]][1] + variables[field[0]])
                 if field[3] == "-":
                     variables[field[0]] = variables[field[2]] - variables[field[4]]
                 if field[3] == "*":
@@ -335,9 +387,6 @@ while PC < len(tac):
                     variables[field[0]] = int(variables[field[2]] and variables[field[4]])
                 if field[3] == "||":
                     variables[field[0]] = int(variables[field[2]] or variables[field[4]])
-                
-
-                
     PC += 1
 print("Error: End of TAC file reached without halt", file=sys.stderr)
 exit(1)
