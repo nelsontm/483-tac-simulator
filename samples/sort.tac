@@ -44,7 +44,7 @@ _L1:
 	_tmp20 = _tmp19 == _tmp16 ;
 	_tmp21 = _tmp17 || _tmp20 ;
 	IfZ _tmp21 Goto _L3 ;
-	_tmp22 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp22 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp22 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -79,7 +79,7 @@ _L4:
 	_tmp37 = _tmp36 == _tmp33 ;
 	_tmp38 = _tmp34 || _tmp37 ;
 	IfZ _tmp38 Goto _L6 ;
-	_tmp39 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp39 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp39 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -103,7 +103,7 @@ _L7:
 	_tmp52 = _tmp51 == _tmp48 ;
 	_tmp53 = _tmp49 || _tmp52 ;
 	IfZ _tmp53 Goto _L9 ;
-	_tmp54 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp54 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp54 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -128,7 +128,7 @@ _L10:
 	_tmp68 = _tmp67 == _tmp64 ;
 	_tmp69 = _tmp65 || _tmp68 ;
 	IfZ _tmp69 Goto _L11 ;
-	_tmp70 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp70 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp70 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -144,7 +144,7 @@ _L11:
 	_tmp78 = _tmp77 == _tmp74 ;
 	_tmp79 = _tmp75 || _tmp78 ;
 	IfZ _tmp79 Goto _L12 ;
-	_tmp80 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp80 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp80 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -169,7 +169,7 @@ _L8:
 	_tmp93 = _tmp92 == _tmp89 ;
 	_tmp94 = _tmp90 || _tmp93 ;
 	IfZ _tmp94 Goto _L13 ;
-	_tmp95 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp95 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp95 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -204,7 +204,7 @@ _L14:
 	_tmp109 = _tmp108 == _tmp105 ;
 	_tmp110 = _tmp106 || _tmp109 ;
 	IfZ _tmp110 Goto _L16 ;
-	_tmp111 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp111 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp111 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -233,7 +233,7 @@ _L15:
 	EndFunc ;
 main:
 	BeginFunc 16 () ;
-	_tmp120 = "\nThis program will read in a bunch of numbers an..." ;
+	_tmp120 = "\nThis program will read in a bunch of numbers and print them\n" ;
 	PushParam _tmp120 ;
 	LCall _PrintString ;
 	PopParams 4 ;

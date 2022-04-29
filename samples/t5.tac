@@ -13,7 +13,7 @@ _L0:
 	_tmp7 = _tmp6 == _tmp3 ;
 	_tmp8 = _tmp4 || _tmp7 ;
 	IfZ _tmp8 Goto _L2 ;
-	_tmp9 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp9 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp9 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -69,7 +69,7 @@ _L4:
 	_tmp34 = _tmp33 == _tmp30 ;
 	_tmp35 = _tmp31 || _tmp34 ;
 	IfZ _tmp35 Goto _L5 ;
-	_tmp36 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp36 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp36 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -88,7 +88,7 @@ _L5:
 	_tmp46 = _tmp45 == _tmp42 ;
 	_tmp47 = _tmp43 || _tmp46 ;
 	IfZ _tmp47 Goto _L6 ;
-	_tmp48 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp48 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp48 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -107,7 +107,7 @@ _L6:
 	_tmp58 = _tmp57 == _tmp54 ;
 	_tmp59 = _tmp55 || _tmp58 ;
 	IfZ _tmp59 Goto _L7 ;
-	_tmp60 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp60 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp60 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -137,7 +137,7 @@ _L8:
 	PopParams 4 ;
 	Goto _L9 ;
 _L10:
-	_tmp70 = "That's not a good way to make points. Try again!\..." ;
+	_tmp70 = "That's not a good way to make points. Try again!\n" ;
 	PushParam _tmp70 ;
 	LCall _PrintString ;
 	PopParams 4 ;

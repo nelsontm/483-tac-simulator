@@ -33,14 +33,14 @@ _L1:
 	EndFunc ;
 main:
 	BeginFunc 56 () ;
-	_tmp13 = "\nThis program computes Fibonacci numbers (slowly..." ;
+	_tmp13 = "\nThis program computes Fibonacci numbers (slowly.. but correctly!)\n" ;
 	PushParam _tmp13 ;
 	LCall _PrintString ;
 	PopParams 4 ;
 _L4:
 	_tmp14 = 1 ;
 	IfZ _tmp14 Goto _L5 ;
-	_tmp15 = "\nEnter the fibonacci number you want: (-1 to qui..." ;
+	_tmp15 = "\nEnter the fibonacci number you want: (-1 to quit) " ;
 	PushParam _tmp15 ;
 	LCall _PrintString ;
 	PopParams 4 ;

@@ -73,7 +73,7 @@ _L1:
 	_tmp34 = _tmp33 == _tmp30 ;
 	_tmp35 = _tmp31 || _tmp34 ;
 	IfZ _tmp35 Goto _L3 ;
-	_tmp36 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp36 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp36 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -120,7 +120,7 @@ _L4:
 	_tmp64 = _tmp63 == _tmp60 ;
 	_tmp65 = _tmp61 || _tmp64 ;
 	IfZ _tmp65 Goto _L6 ;
-	_tmp66 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp66 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp66 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -140,7 +140,7 @@ _L6:
 	_tmp77 = _tmp76 == _tmp73 ;
 	_tmp78 = _tmp74 || _tmp77 ;
 	IfZ _tmp78 Goto _L7 ;
-	_tmp79 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp79 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp79 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -157,7 +157,7 @@ _L7:
 	_tmp88 = _tmp87 == _tmp84 ;
 	_tmp89 = _tmp85 || _tmp88 ;
 	IfZ _tmp89 Goto _L8 ;
-	_tmp90 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp90 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp90 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -176,7 +176,7 @@ _L8:
 	_tmp100 = _tmp99 == _tmp96 ;
 	_tmp101 = _tmp97 || _tmp100 ;
 	IfZ _tmp101 Goto _L9 ;
-	_tmp102 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp102 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp102 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -209,7 +209,7 @@ _L10:
 	_tmp118 = _tmp117 == _tmp114 ;
 	_tmp119 = _tmp115 || _tmp118 ;
 	IfZ _tmp119 Goto _L11 ;
-	_tmp120 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp120 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp120 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -267,7 +267,7 @@ _L13:
 	_tmp146 = _tmp145 == _tmp142 ;
 	_tmp147 = _tmp143 || _tmp146 ;
 	IfZ _tmp147 Goto _L15 ;
-	_tmp148 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp148 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp148 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -291,7 +291,7 @@ _L15:
 	_tmp160 = _tmp159 == _tmp156 ;
 	_tmp161 = _tmp157 || _tmp160 ;
 	IfZ _tmp161 Goto _L16 ;
-	_tmp162 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp162 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp162 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -347,7 +347,7 @@ _L18:
 	_tmp191 = _tmp190 == _tmp187 ;
 	_tmp192 = _tmp188 || _tmp191 ;
 	IfZ _tmp192 Goto _L20 ;
-	_tmp193 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp193 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp193 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -405,7 +405,7 @@ _L24:
 	_tmp219 = _tmp218 == _tmp215 ;
 	_tmp220 = _tmp216 || _tmp219 ;
 	IfZ _tmp220 Goto _L26 ;
-	_tmp221 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp221 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp221 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1076,7 +1076,7 @@ _L58:
 	_tmp472 = _tmp471 == _tmp468 ;
 	_tmp473 = _tmp469 || _tmp472 ;
 	IfZ _tmp473 Goto _L60 ;
-	_tmp474 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp474 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp474 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1102,7 +1102,7 @@ _L60:
 	_tmp488 = _tmp487 == _tmp484 ;
 	_tmp489 = _tmp485 || _tmp488 ;
 	IfZ _tmp489 Goto _L61 ;
-	_tmp490 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp490 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp490 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1145,7 +1145,7 @@ _L62:
 	_tmp509 = _tmp508 == _tmp505 ;
 	_tmp510 = _tmp506 || _tmp509 ;
 	IfZ _tmp510 Goto _L64 ;
-	_tmp511 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp511 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp511 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1169,7 +1169,7 @@ _L64:
 	_tmp524 = _tmp523 == _tmp520 ;
 	_tmp525 = _tmp521 || _tmp524 ;
 	IfZ _tmp525 Goto _L66 ;
-	_tmp526 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp526 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp526 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1208,7 +1208,7 @@ _L67:
 	_tmp544 = _tmp543 == _tmp540 ;
 	_tmp545 = _tmp541 || _tmp544 ;
 	IfZ _tmp545 Goto _L69 ;
-	_tmp546 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp546 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp546 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1233,7 +1233,7 @@ _L69:
 	_tmp560 = _tmp559 == _tmp556 ;
 	_tmp561 = _tmp557 || _tmp560 ;
 	IfZ _tmp561 Goto _L71 ;
-	_tmp562 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp562 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp562 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1277,7 +1277,7 @@ _L72:
 	_tmp581 = _tmp580 == _tmp577 ;
 	_tmp582 = _tmp578 || _tmp581 ;
 	IfZ _tmp582 Goto _L74 ;
-	_tmp583 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp583 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp583 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1307,7 +1307,7 @@ _L74:
 	_tmp600 = _tmp599 == _tmp596 ;
 	_tmp601 = _tmp597 || _tmp600 ;
 	IfZ _tmp601 Goto _L76 ;
-	_tmp602 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp602 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp602 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1347,7 +1347,7 @@ _L77:
 	_tmp620 = _tmp619 == _tmp616 ;
 	_tmp621 = _tmp617 || _tmp620 ;
 	IfZ _tmp621 Goto _L79 ;
-	_tmp622 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp622 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp622 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -1507,7 +1507,7 @@ _L82:
 	PushParam _tmp680 ;
 	LCall _PrintString ;
 	PopParams 4 ;
-	_tmp681 = "\nCS143 BlackJack Copyright (c) 1999 by Peter Mor..." ;
+	_tmp681 = "\nCS143 BlackJack Copyright (c) 1999 by Peter Mork.\n" ;
 	PushParam _tmp681 ;
 	LCall _PrintString ;
 	PopParams 4 ;

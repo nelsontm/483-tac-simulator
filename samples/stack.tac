@@ -41,7 +41,7 @@ _Stack.Push:
 	_tmp20 = _tmp19 == _tmp16 ;
 	_tmp21 = _tmp17 || _tmp20 ;
 	IfZ _tmp21 Goto _L1 ;
-	_tmp22 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp22 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp22 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -69,7 +69,7 @@ _Stack.Pop:
 	_tmp37 = _tmp36 == _tmp33 ;
 	_tmp38 = _tmp34 || _tmp37 ;
 	IfZ _tmp38 Goto _L2 ;
-	_tmp39 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp39 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp39 ;
 	LCall _PrintString ;
 	PopParams 4 ;

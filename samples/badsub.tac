@@ -35,7 +35,7 @@ _L1:
 	_tmp19 = _tmp18 == _tmp15 ;
 	_tmp20 = _tmp16 || _tmp19 ;
 	IfZ _tmp20 Goto _L3 ;
-	_tmp21 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp21 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp21 ;
 	LCall _PrintString ;
 	PopParams 4 ;

@@ -193,7 +193,7 @@ _L9:
 	_tmp76 = _tmp75 == _tmp72 ;
 	_tmp77 = _tmp73 || _tmp76 ;
 	IfZ _tmp77 Goto _L11 ;
-	_tmp78 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp78 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp78 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -247,7 +247,7 @@ _L15:
 	_tmp105 = _tmp104 == _tmp101 ;
 	_tmp106 = _tmp102 || _tmp105 ;
 	IfZ _tmp106 Goto _L17 ;
-	_tmp107 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp107 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp107 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -264,7 +264,7 @@ _L17:
 	_tmp116 = _tmp115 == _tmp112 ;
 	_tmp117 = _tmp113 || _tmp116 ;
 	IfZ _tmp117 Goto _L18 ;
-	_tmp118 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp118 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp118 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -296,7 +296,7 @@ _DenseMatrix.Set:
 	_tmp132 = _tmp131 == _tmp128 ;
 	_tmp133 = _tmp129 || _tmp132 ;
 	IfZ _tmp133 Goto _L19 ;
-	_tmp134 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp134 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp134 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -313,7 +313,7 @@ _L19:
 	_tmp143 = _tmp142 == _tmp139 ;
 	_tmp144 = _tmp140 || _tmp143 ;
 	IfZ _tmp144 Goto _L20 ;
-	_tmp145 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp145 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp145 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -334,7 +334,7 @@ _DenseMatrix.Get:
 	_tmp154 = _tmp153 == _tmp150 ;
 	_tmp155 = _tmp151 || _tmp154 ;
 	IfZ _tmp155 Goto _L21 ;
-	_tmp156 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp156 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp156 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -351,7 +351,7 @@ _L21:
 	_tmp165 = _tmp164 == _tmp161 ;
 	_tmp166 = _tmp162 || _tmp165 ;
 	IfZ _tmp166 Goto _L22 ;
-	_tmp167 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp167 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp167 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -438,7 +438,7 @@ _L24:
 	_tmp193 = _tmp192 == _tmp189 ;
 	_tmp194 = _tmp190 || _tmp193 ;
 	IfZ _tmp194 Goto _L26 ;
-	_tmp195 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp195 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp195 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -465,7 +465,7 @@ _SparseMatrix.Find:
 	_tmp207 = _tmp206 == _tmp203 ;
 	_tmp208 = _tmp204 || _tmp207 ;
 	IfZ _tmp208 Goto _L27 ;
-	_tmp209 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp209 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp209 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -540,7 +540,7 @@ _L31:
 	_tmp243 = _tmp242 == _tmp239 ;
 	_tmp244 = _tmp240 || _tmp243 ;
 	IfZ _tmp244 Goto _L33 ;
-	_tmp245 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp245 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp245 ;
 	LCall _PrintString ;
 	PopParams 4 ;
@@ -566,7 +566,7 @@ _L33:
 	_tmp257 = _tmp256 == _tmp253 ;
 	_tmp258 = _tmp254 || _tmp257 ;
 	IfZ _tmp258 Goto _L34 ;
-	_tmp259 = "Decaf runtime error: Array subscript out of bound..." ;
+	_tmp259 = "Decaf runtime error: Array subscript out of bounds\n" ;
 	PushParam _tmp259 ;
 	LCall _PrintString ;
 	PopParams 4 ;

@@ -1,0 +1,5 @@
+Error: variable _tmp16 undefined
+
+This program computes Fibonacci numbers (slowly.. but correctly!)
+
+Enter the fibonacci number you want: (-1 to quit) 

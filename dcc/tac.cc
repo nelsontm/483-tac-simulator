@@ -44,8 +44,9 @@ LoadStringConstant::LoadStringConstant(Location *d, const char *s)
   const char *quote = (*s == '"') ? "" : "\"";
   str = new char[strlen(s) + 2*strlen(quote) + 1];
   sprintf(str, "%s%s%s", quote, s, quote);
-  quote = (strlen(str) > 50) ? "...\"" : "";
-  sprintf(printed, "%s = %.50s%s", dst->GetName(), str, quote);
+  //quote = (strlen(str) > 50) ? "...\"" : "";
+  sprintf(printed, "%s = %s", dst->GetName(), str);
+  //sprintf(printed, "%s = %.50s%s", dst->GetName(), str, quote);
 }
 void LoadStringConstant::EmitSpecific(Mips *mips) {
   mips->EmitLoadStringConstant(dst, str);
