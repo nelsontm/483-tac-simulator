@@ -1,0 +1,14 @@
+test.out
+sol.out
+dcc
+dpp
+*.o
+lex.yy.c
+dpp.yy.c
+y.tab.c
+y.tab.h
+*.core
+core
+*.purify
+purify.log
+y.output
