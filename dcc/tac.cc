@@ -163,7 +163,7 @@ BeginFunc::BeginFunc() {
 }
 void BeginFunc::SetFrameSize(int numBytesForAllLocalsAndTemps) {
   frameSize = numBytesForAllLocalsAndTemps; 
-  sprintf(printed,"BeginFunc %d", frameSize);
+  sprintf(printed,"BeginFunc %d %s", frameSize, formList.c_str());
 }
 void BeginFunc::EmitSpecific(Mips *mips) {
   mips->EmitBeginFunction(frameSize);
