@@ -7,6 +7,7 @@ tac() {
             else
             python3 tacsim.py $file > test/$prog.out 2>&1
         fi
+        diff --ignore-all-space samples/$prog.out test/$prog.out
     done
 }
 

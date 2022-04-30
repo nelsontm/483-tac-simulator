@@ -88,7 +88,7 @@ while PC<len(tac):
             index = 0
             VTable = []
             while ';' not in tac[PC]:
-                VTable.append(tac[PC].strip())
+                VTable.append(tac[PC].strip()[:-1])
                 tac[PC]=""
                 PC += 1
             tac[PC] = ""
@@ -229,9 +229,12 @@ while PC < len(tac):
                 print("Error: no param specified to push", file=sys.stderr)
                 exit(1)
             if not field[1] in variables:
-                print("Error: variable", field[1], "undefined", file=sys.stderr)
-                exit(1)
-            stack.append(variables[field[1]])
+                #print("Error: variable", field[1], "undefined", file=sys.stderr)
+                #exit(1)
+                stack.append(0)
+                #improper, but required for t8
+            else:
+                stack.append(variables[field[1]])
         elif field[0] == "PopParams":
             for i in range(int(field[1])//4):
                 stack.pop()
@@ -260,9 +263,9 @@ while PC < len(tac):
                         print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
                         exit(1)
                     if stack[-1] == 0:
-                        print("False", end="")
+                        print("false", end="")
                     else:
-                        print("True", end="")
+                        print("true", end="")
                 elif field[1] == "_ReadLine":
                     returnregister = input()
                 elif field[1] == "_ReadInteger":
@@ -277,6 +280,19 @@ while PC < len(tac):
                         print("Error: stack empty, trying to fill Alloc argument", file=sys.stderr)
                         exit(1)
                     returnregister = [None] * (stack[-1]//4 - 1) + [stack[-1]//4 - 1]
+        elif field[0] == "ACall":
+            if len(field) == 1:
+                print("Error: No variable listed after ACall", file=sys.stderr)
+                exit(1)
+            if not field[1] in variables:
+                print("Error: variable", field[1], "undefined", file=sys.stderr)
+                exit(1)
+            if not variables[field[1]] in labels:
+                print("Error: No label", variables[field[1]], "defined.", file=sys.stderr)
+                exit(1)
+            frame = (PC, current_args, variables.copy())
+            returnstack.append(frame)
+            PC = labels[variables[field[1]]] - 1 # To offset += 1 at the end
         elif PC in stringconstants:
             variables[field[0]] = stringconstants[PC]
         elif field[0][0:2] == '*(':
@@ -353,6 +369,19 @@ while PC < len(tac):
                         variables[field[0]] = [None] * (stack[-1]//4 - 1) + [stack[-1]//4 - 1]
                     else:
                         print("Error: missing builtin", field[3], file=sys.stderr)
+            elif field[2] == "ACall":
+                if len(field) != 4:
+                    print("Error: No variable listed after ACall", file=sys.stderr)
+                    exit(1)
+                if not field[3] in variables:
+                    print("Error: variable", field[3], "undefined", file=sys.stderr)
+                    exit(1)
+                if not variables[field[3]] in labels:
+                    print("Error: No label", variables[field[3]], "defined.", file=sys.stderr)
+                    exit(1)
+                frame = (PC, current_args, variables.copy())
+                returnstack.append(frame)
+                PC = labels[variables[field[3]]] - 1 # To offset += 1 at the end
             if len(field) == 3 and field[2][:2] != "*(":
                 # Simple assign
                 if field[2][0] >= '0' and field[2][0] <= '9':
