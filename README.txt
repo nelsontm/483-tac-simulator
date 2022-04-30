@@ -35,7 +35,7 @@ Table of Contents:
         Method Calls: dest = ACall src. "dest = " is optional, and is the same as assignment. src is the same as assignment.
 
 2. Repository Directory
-    The simulator scripts are in the root folder of the repository.
+    The simulator script tacsim.py is in the root folder of the repository. Run with python3 to get arg info.
     Decaf compiler is in dcc. To run dcc, first cd into dcc, then call make, then run the executable dcc.
     The C++ code in the dcc directory had been modified to generate simulatable TAC (see section 3).
     The samples directory contains the decaf code from eecs483 project 4, along with the provided simulator output and 
