@@ -22,6 +22,10 @@ def get_argparser() -> argparse.ArgumentParser:
             const=True, default=False, nargs='?', required=False,
             help="Print instruction statistics.")
 
+    parser.add_argument("-l", "--long",
+            const=True, default=False, nargs='?', required=False,
+            help="Run with 64 bit registers.")
+
     return parser
 
 def read_lines(file_name: str) -> [str]:
@@ -257,7 +261,10 @@ while PC < len(tac):
                     if(len(stack)) == 0:
                         print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
                         exit(1)
-                    print(stack[-1], end="")
+                    if not args.long and field[1] == "_PrintInt":
+                        print(stack[-1] % (2**32), end="")
+                    else:
+                        print(stack[-1], end="")
                 elif field[1] == "_PrintBool":
                     if(len(stack)) == 0:
                         print("Error: stack empty, trying to fill Print argument", file=sys.stderr)
