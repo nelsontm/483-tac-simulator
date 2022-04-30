@@ -11,16 +11,17 @@ Table of Contents:
     Labels can contain alphanumeric characters, underscores, and periods. Labels cannot begin with numbers.
     Labels are followed by colons (:) and then a newline or whitespace. 
     No other colons appear in TAC outside string constants and comments.
-    There are many instruction formats. Each instruction is preceded by whitespace and followed by optional whitespace and a semicolon.
+    Each instruction is preceded by whitespace and followed by optional whitespace and a semicolon.
     Comments may appear after the semicolon.
-    VTables begin with "VTable ", followed by the class name, then " =" and a newline, and then the list of elements in the VTable ending with a semicolon.
+    VTables begin with "VTable ", followed by the class name, then " =" and a newline,
+        and then the list of elements in the VTable ending with a semicolon.
     Elements in the VTable begin with whitespace followed by the function name, a comma, and a newline.
     TAC supports the following instructions:
         Assignment: dest = src. Src may be an int constant, a string constant, a VTable reference, a Label, or an address.
         Load: dest = *(ref + offset). ref must be a reference. "+ offset" is optional and if not included, is 0.
             Offsets are byte-addressed. They will be divided by 4 to index into simulator arrays.
         Store: *(ref + offset) = src. Src can be the same as assignment. Ref and offset are the same as load.
-        Binary Operation: dest = op1 b op2. op1 and op2 are the same as assignment's src. dest is the same as assigment's dest.
+        Binary Operation: dest = op1 b op2. op1 and op2 are the same as assignment's src. dest is the same as assignment.
             b is one of "+", "-", "*", "/", "%", "==", "<", "&&", "||"
         Unconditional branch: Goto label. label must be a label.
         Conditional branch: IfZ test Goto label. label must be a label. Test is the same as assignment's src.
