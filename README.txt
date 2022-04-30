@@ -47,7 +47,7 @@ Table of Contents:
 
 3. Comments on Simulation
     The TAC code was not simulatable as-is. The main issue came from function parameters. While the dcc contained information
-        about the order of function parameters to output to MIPS, the TAC did not contain this information. This has been added.
+        about the order of function parameters to output to MIPS, the TAC did not contain this information. Now it does.
     Also, the MIPS code for built-in calls has been removed, and these are implemented in the simulator instead.
     The simulator has the following components:
         Array of TAC lines, with comments removed.
